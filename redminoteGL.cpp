@@ -5,6 +5,8 @@
 
 /* Global variables */
 char title[] = "3D Shapes";
+GLfloat angle = 0.0f;
+int refreshMills = 15;
 
 /* Initialize OpenGL Graphics */
 void initGL() {
@@ -25,6 +27,7 @@ void display() {
    // Render a color-cube consisting of 6 quads with different colors
    glLoadIdentity();                 // Reset the model-view matrix
    glTranslatef(1.5f, 0.0f, -30.0f);  // Move right and into the screen
+   glRotatef(angle, 1.0f, 1.0f, 1.0f);  // Rotate about (1,1,1)-axis [NEW]
 
    glBegin(GL_QUADS);                // Begin drawing the color cube with 6 quads
       // Top face (y = 7.5f)
@@ -72,6 +75,12 @@ void display() {
    glEnd();  // End of drawing color-cube
 
    glutSwapBuffers();  // Swap the front and back frame buffers (double buffering)
+   angle += 0.2f;
+}
+
+void timer(int value) {
+   glutPostRedisplay();      // Post re-paint request to activate display()
+   glutTimerFunc(refreshMills, timer, 0); // next timer call milliseconds later
 }
 
 /* Handler for window re-size event. Called back when the window first appears and
@@ -101,6 +110,7 @@ int main(int argc, char** argv) {
    glutDisplayFunc(display);       // Register callback handler for window re-paint event
    glutReshapeFunc(reshape);       // Register callback handler for window re-size event
    initGL();                       // Our own OpenGL initialization
+   glutTimerFunc(0, timer, 0);     // First timer call immediately [NEW]
    glutMainLoop();                 // Enter the infinite event-processing loop
    return 0;
 }
