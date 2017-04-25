@@ -24,6 +24,7 @@ void display() {
 
    // Render a color-cube consisting of 6 quads with different colors
    glLoadIdentity();                 // Reset the model-view matrix
+<<<<<<< HEAD
    glTranslatef(1.5f, 0.0f, -30.0f);  // Move right and into the screen
 
    glBegin(GL_QUADS);                // Begin drawing the color cube with 6 quads
@@ -69,6 +70,53 @@ void display() {
       glVertex3f(3.8f,  7.5f, -0.435f);
       glVertex3f(3.8f, -7.5f, -0.435f);
       glVertex3f(3.8f, -7.5f,  0.435f);
+=======
+   glTranslatef(1.5f, 0.0f, -14.0f);  // Move right and into the screen
+
+   glBegin(GL_QUADS);                // Begin drawing the color cube with 6 quads
+      // Top face (y = 1.5f)
+      // Define vertices in counter-clockwise (CCW) order with normal pointing out
+      glColor3f(1.0f, 1.0f, 1.0f);     // white
+      glVertex3f(-0.8f,  1.5f, 0.25f);
+      glVertex3f(0.8f,  1.5f, 0.25f);
+      glVertex3f(0.8f, 1.5f, -0.25f);
+      glVertex3f(-0.8f, -1.5f, -0.25f);
+
+      // Bottom face (y = -1.0f)
+      glColor3f(1.0f, 1.0f, 1.0f);     // white
+      glVertex3f( -0.8f, -1.5f,  0.25f);
+      glVertex3f(-0.8f, -1.5f,  0.25);
+      glVertex3f(0.8f, -1.5f, -0.25f);
+      glVertex3f( -0.8f, -1.5f, -0.25f);
+
+      // Front face  (z = 1.0f)
+      glColor3f(1.0f, 1.0f, 1.0f);     // white
+      glVertex3f( -0.8f, 1.5f, 0.25f);
+      glVertex3f(-0.8f, -1.5f,  0.25f);
+      glVertex3f( 0.8f, -1.5f,  0.25f);
+      glVertex3f( 0.8f, 1.5f, 0.25f);
+
+      // Back face (z = -1.0f)
+      glColor3f(1.0f, 1.0f, 1.0f);     // white
+      glVertex3f( -0.8f, 1.5f, -0.25f);
+      glVertex3f(-0.8f, -1.5f,  -0.25f);
+      glVertex3f( 0.8f, -1.5f,  -0.25f);
+      glVertex3f( 0.8f, 1.5f, -0.25f);
+
+      // Left face (x = -1.0f)
+      glColor3f(1.0f, 1.0f, 1.0f);     // white
+      glVertex3f(-0.8f,  1.5f,  0.25f);
+      glVertex3f(-0.8f,  1.5f, -0.25f);
+      glVertex3f(-0.8f, -1.5f, -0.25f);
+      glVertex3f(-0.8f, -1.5f,  0.25f);
+
+      // Right face (x = 1.0f)
+      glColor3f(1.0f, 1.0f, 1.0f);     // white
+      glVertex3f(0.8f,  1.5f,  0.25f);
+      glVertex3f(0.8f,  1.5f, -0.25f);
+      glVertex3f(0.8f, -1.5f, -0.25f);
+      glVertex3f(0.8f, -1.5f,  0.25f);
+>>>>>>> 7f96b97d09cddc347a25c93e762bcbae8934f0c0
    glEnd();  // End of drawing color-cube
 
    glutSwapBuffers();  // Swap the front and back frame buffers (double buffering)
