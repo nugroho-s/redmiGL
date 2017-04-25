@@ -7,6 +7,9 @@
 char title[] = "3D Shapes";
 GLfloat angle = 0.0f;
 int refreshMills = 15;
+GLfloat scale = 0.002f;
+int sign = 1;
+int count = 0;
 
 /* Initialize OpenGL Graphics */
 void initGL() {
@@ -28,6 +31,7 @@ void display() {
    glLoadIdentity();                 // Reset the model-view matrix
    glTranslatef(1.5f, 0.0f, -30.0f);  // Move right and into the screen
    glRotatef(angle, 1.0f, 1.0f, 1.0f);  // Rotate about (1,1,1)-axis [NEW]
+   glScalef(scale,scale,scale);
 
    glBegin(GL_QUADS);                // Begin drawing the color cube with 6 quads
       // Top face (y = 7.5f)
@@ -75,6 +79,10 @@ void display() {
    glEnd();  // End of drawing color-cube
 
    glutSwapBuffers();  // Swap the front and back frame buffers (double buffering)
+   if (count < 80){
+       count++;
+       scale += (0.02f)*sign;
+   }
    angle += 0.2f;
 }
 
