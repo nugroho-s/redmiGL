@@ -8,7 +8,7 @@
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
 
 #define PI 3.14159265359 
-#define abuabu1 169,169,169
+#define abuabu1 149,149,141
 #define abuabu2 150,150,150
 #define hitam 0,0,0
 #define ROTATE_ANGLE 1
@@ -42,7 +42,7 @@ void Special_Keys(int key, int x, int y)
 
 /* Initialize OpenGL Graphics */
 void initGL() {
-	glClearColor(1.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
+	glClearColor(0.0f, 0.0f, 1.0f, 1.0f); // Set background color to black and opaque
 	glClearDepth(1.0f);                   // Set background depth to farthest
 	glEnable(GL_DEPTH_TEST);   // Enable depth testing for z-culling
 	glDepthFunc(GL_LEQUAL);    // Set the type of depth-test
