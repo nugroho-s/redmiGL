@@ -2,7 +2,13 @@
 * OGL01Shape3D.cpp: 3D Shapes
 */
 #include "stdafx.h"
+#include <cmath>
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
+
+#define PI 3.14159265359 
+#define abuabu1 169,169,169
+#define abuabu2 150,150,150
+#define hitam 0,0,0
 
 /* Global variables */
 char title[] = "3D Shapes";
@@ -10,9 +16,10 @@ GLfloat angle = 0.0f;
 GLfloat viewangle = 0, tippangle = 0;
 GLfloat  xAngle = 0.0, yAngle = 0.0, zAngle = 0.0;
 int refreshMills = 15;
+double twicePi = PI * 2;
+int triangleAmount = 40;
 
-#define abuabu1 169,169,169
-#define hitam 0,0,0
+
 
 
 void Special_Keys(int key, int x, int y)
@@ -44,16 +51,7 @@ void initGL() {
 /* Handler for window-repaint event. Called back when the window first appears and
 whenever the window needs to be re-painted. */
 
-void display() {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear color and depth buffers
-	glMatrixMode(GL_MODELVIEW);     // To operate on model-view matrix
-
-	// Render a color-cube consisting of 6 quads with different colors
-	glLoadIdentity();                 // Reset the model-view matrix
-	glTranslatef(0.0f, 0.0f, -30.0f);  // Move right and into the screen
-	glRotatef(tippangle, 1, 0, 0);  // Up and down arrow keys 'tip' view.
-	glRotatef(viewangle, 0, 1, 0);  // Right/left arrow keys 'turn' view.
-
+void gambarbalokHP(){
 	glBegin(GL_QUADS);                // Begin drawing the color cube with 6 quads
 	// Top face (y = 7.5f)
 	// Define vertices in counter-clockwise (CCW) order with normal pointing out
@@ -61,12 +59,12 @@ void display() {
 	glVertex3f(-3.8f, 7.5f, 0.435f);
 	glVertex3f(3.8f, 7.5f, 0.435f);
 	glVertex3f(3.8f, 7.5f, -0.435f);
-	glVertex3f(-3.8f, -7.5f, -0.435f);
+	glVertex3f(-3.8f, 7.5f, -0.435f);
 
 	// Bottom face (y = -1.0f)
 	glColor3ub(abuabu1);
 	glVertex3f(-3.8f, -7.5f, 0.435f);
-	glVertex3f(-3.8f, -7.5f, 0.435);
+	glVertex3f(3.8f, -7.5f, 0.435f);
 	glVertex3f(3.8f, -7.5f, -0.435f);
 	glVertex3f(-3.8f, -7.5f, -0.435f);
 
@@ -98,7 +96,149 @@ void display() {
 	glVertex3f(3.8f, -7.5f, -0.435f);
 	glVertex3f(3.8f, -7.5f, 0.435f);
 	glEnd();  // End of drawing color-cube
+}
 
+void gambarkomponenbawah(){
+	glBegin(GL_QUADS);
+		glColor3ub(34, 36, 35);
+		glVertex3f(-2.56f, -7.5f, 0.21f);
+		glVertex3f(-1.85f, -7.5f, 0.21f);
+		glVertex3f(-1.75f, -7.5f, -0.21f);
+		glVertex3f(-2.66f, -7.5f, -0.21f);
+	glEnd();
+
+	float x = -3.4;
+	float y = -7.5;
+	float z = 0;
+	float radius = 0.05;
+
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3ub(hitam);
+	glVertex3f(x, y, 0); // center of circle
+	for (int i = 0; i <= triangleAmount; i++) {
+		glVertex3f(
+			x + (radius * cos(i *  twicePi / triangleAmount)), y,
+			z + (radius * sin(i * twicePi / triangleAmount))
+			);
+	}
+	glEnd();
+
+}
+
+void gambarkomponenkanan(){
+	glBegin(GL_QUADS);
+	glColor3ub(abuabu2);
+	glVertex3f(3.8f, 1.7f, 0.21f);
+	glVertex3f(3.8f, 1.7f, -0.21f);
+	glVertex3f(3.8f, 0.7f, -0.21f);
+	glVertex3f(3.8f, 0.7f, 0.21f);
+	glEnd();
+
+	glBegin(GL_QUADS);
+	glColor3ub(abuabu2);
+	glVertex3f(3.8f, 5.1f, 0.21f);
+	glVertex3f(3.8f, 5.1f, -0.21f);
+	glVertex3f(3.8f, 2.3f, -0.21f);
+	glVertex3f(3.8f, 2.3f, 0.21f);
+	glEnd();
+
+}
+
+void gambarkomponenkiri(){
+	glBegin(GL_QUADS);
+	glColor3ub(abuabu2);
+	glVertex3f(-3.8f, 5.4f, 0.21f);
+	glVertex3f(-3.8f, 5.4f, -0.21f);
+	glVertex3f(-3.8f, 2.9f, -0.21f);
+	glVertex3f(-3.8f, 2.9f, 0.21f);
+	glEnd();
+
+	float x = -3.8;
+	float y = 3.2;
+	float z = 0;
+	float radius = 0.05;
+
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3ub(hitam);
+	glVertex3f(x, y, 0); // center of circle
+	for (int i = 0; i <= triangleAmount; i++) {
+		glVertex3f(
+			x, y + (radius * cos(i *  twicePi / triangleAmount)),
+			z + (radius * sin(i * twicePi / triangleAmount))
+			);
+	}
+	glEnd();
+
+}
+
+void gambarkomponenatas(){
+
+	
+
+	float x = -1.5;
+	float y = 7.5;
+	float z = 0;
+	float radius = 0.3;
+
+	
+
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3ub(hitam);
+	glVertex3f(x,y,0); // center of circle
+	for (int i = 0; i <= triangleAmount; i++) {
+		glVertex3f(
+			x + (radius * cos(i *  twicePi / triangleAmount)),y,
+			z + (radius * sin(i * twicePi / triangleAmount))
+			);
+	}
+	glEnd();
+
+	x = 1.4;
+	radius = 0.2;
+
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3ub(hitam);
+	glVertex3f(x, y, 0); // center of circle
+	for (int i = 0; i <= triangleAmount; i++) {
+		glVertex3f(
+			x + (radius * cos(i *  twicePi / triangleAmount)), y,
+			z + (radius * sin(i * twicePi / triangleAmount))
+			);
+	}
+	glEnd();
+
+	x = -2.5;
+	radius = 0.05;
+
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3ub(hitam);
+	glVertex3f(x, y, 0); // center of circle
+	for (int i = 0; i <= triangleAmount; i++) {
+		glVertex3f(
+			x + (radius * cos(i *  twicePi / triangleAmount)), y,
+			z + (radius * sin(i * twicePi / triangleAmount))
+			);
+	}
+	glEnd();
+
+}
+
+void display() {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear color and depth buffers
+	glMatrixMode(GL_MODELVIEW);     // To operate on model-view matrix
+
+	// Render a color-cube consisting of 6 quads with different colors
+	glLoadIdentity();                 // Reset the model-view matrix
+	glTranslatef(0.0f, 0.0f, -30.0f);  // Move right and into the screen
+	glRotatef(tippangle, 1, 0, 0);  // Up and down arrow keys 'tip' view.
+	glRotatef(viewangle, 0, 1, 0);  // Right/left arrow keys 'turn' view.
+
+	
+	gambarbalokHP();
+	gambarkomponenbawah();
+	gambarkomponenkanan();
+	gambarkomponenatas();
+	gambarkomponenkiri();
 	glutSwapBuffers();  // Swap the front and back frame buffers (double buffering)
 	angle += 0.2f;
 }
